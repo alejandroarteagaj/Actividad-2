@@ -29,7 +29,7 @@ def read_dicom_file(path):
     img_RGB = cv2.cvtColor(img2, cv2.COLOR_GRAY2RGB)
     return img_RGB, img2show
 
-def load_img_file(self):
+def load_img_file():##Funciona
     filepath = filedialog.askopenfilename(
         initialdir="/",
         title="Select image",
@@ -46,33 +46,33 @@ def load_img_file(self):
         UI.img1 = ImageTk.PhotoImage(UI.img1)
         UI.text_img1.image_create(END, image=UI.img1)
         UI.button1["state"] = "enabled"
-## voy aqui ojo
+
 def run_model(self):
     self.label, self.proba, self.heatmap = Inference.predict(self.array)
     self.img2 = Image.fromarray(self.heatmap)
     self.img2 = self.img2.resize((250, 250), Image.ANTIALIAS)
     self.img2 = ImageTk.PhotoImage(self.img2)
     print("OK")
-    self.text_img2.image_create(END, image=self.img2)
-    self.text2.insert(END, self.label)
-    self.text3.insert(END, "{:.2f}".format(self.proba) + "%")
+    UI.text_img2.image_create(END, image=self.img2)
+    UI.text2.insert(END, self.label)
+    UI.text3.insert(END, "{:.2f}".format(self.proba) + "%")
     
 
 def save_results_csv(self):
     with open("historial.csv", "a") as csvfile:
          w = csv.writer(csvfile, delimiter="-")
          w.writerow(
-             [self.text1.get(), self.label, "{:.2f}".format(self.proba) + "%"]
+             [UI.text1.get(), self.label, "{:.2f}".format(self.proba) + "%"]
         )
     showinfo(title="Guardar", message="Los datos se guardaron con éxito.")
 
-def create_pdf(self):
-    cap = tkcap.CAP(self.root)
-    ID = "Reporte" + str(self.reportID) + ".jpg"
+def create_pdf():
+    cap = tkcap.CAP(UI.root)
+    ID = "Reporte" + str(UI.reportID) + ".jpg"
     img = cap.capture(ID)
     img = Image.open(ID)
     img = img.convert("RGB")
-    pdf_path = r"Reporte" + str(self.reportID) + ".pdf"
+    pdf_path = r"Reporte" + str(UI.reportID) + ".pdf"
     img.save(pdf_path)
     reportID += 1
     showinfo(title="PDF", message="El PDF fue generado con éxito.")
@@ -82,11 +82,11 @@ def delete(self):
         title="Confirmación", message="Se borrarán todos los datos.", icon=WARNING
     )
     if answer:
-        self.text1.delete(0, "end")
-        self.text2.delete(1.0, "end")
-        self.text3.delete(1.0, "end")
-        self.text_img1.delete(self.img1, "end")
-        self.text_img2.delete(self.img2, "end")
+        UI.text1.delete(0, "end")
+        UI.text2.delete(1.0, "end")
+        UI.text3.delete(1.0, "end")
+        UI.text_img1.delete(self.img1, "end")
+        UI.text_img2.delete(self.img2, "end")
         showinfo(title="Borrar", message="Los datos se borraron con éxito")
 
 def read_dicom_file(path):

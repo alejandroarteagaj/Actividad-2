@@ -10,7 +10,7 @@ import tkcap
 from PIL import ImageTk, Image
 import csv
 import backend
-
+##Funciona
 class App:
     def __init__(self):
         self.root = Tk()
