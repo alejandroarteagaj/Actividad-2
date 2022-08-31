@@ -11,7 +11,17 @@ import numpy as np
 import time
 import tensorflow as tf
 import pydicom as dicom
-
+from UI import button1
+from UI import text_img1
+from UI import text2
+from UI import text1
+from UI import text3
+from UI import text_img2
+from UI import reportID
+from UI import root
+from UI import img1
+from UI import img2
+from Inference import predict
 tf.compat.v1.disable_eager_execution()
 tf.compat.v1.experimental.output_all_intermediates(True)
 import cv2
@@ -26,7 +36,7 @@ def read_dicom_file(path):
     img_RGB = cv2.cvtColor(img2, cv2.COLOR_GRAY2RGB)
     return img_RGB, img2show
 
-def load_img_file(self):
+def load_img_file():
     filepath = filedialog.askopenfilename(
         initialdir="/",
         title="Select image",
@@ -38,51 +48,51 @@ def load_img_file(self):
             ),
         )
     if filepath:
-        self.array, img2show = read_dicom_file(filepath)
-        self.img1 = img2show.resize((250, 250), Image.ANTIALIAS)
-        self.img1 = ImageTk.PhotoImage(self.img1)
-        self.text_img1.image_create(END, image=self.img1)
-        self.button1["state"] = "enabled"
-
-def run_model(self):
-    self.label, self.proba, self.heatmap = predict(self.array)
-    self.img2 = Image.fromarray(self.heatmap)
-    self.img2 = self.img2.resize((250, 250), Image.ANTIALIAS)
-    self.img2 = ImageTk.PhotoImage(self.img2)
+        array, img2show = read_dicom_file(filepath)
+        img1 = img2show.resize((250, 250), Image.ANTIALIAS)
+        img1 = ImageTk.PhotoImage(img1)
+        text_img1.image_create(END, image=img1)
+        button1["state"] = "enabled"
+## voy aqui ojo
+def run_model(array):
+    label, proba, heatmap = predict(array)
+    img2 = Image.fromarray(heatmap)
+    img2 = img2.resize((250, 250), Image.ANTIALIAS)
+    img2 = ImageTk.PhotoImage(img2)
     print("OK")
-    self.text_img2.image_create(END, image=self.img2)
-    self.text2.insert(END, self.label)
-    self.text3.insert(END, "{:.2f}".format(self.proba) + "%")
+    text_img2.image_create(END, image=img2)
+    text2.insert(END, label)
+    text3.insert(END, "{:.2f}".format(proba) + "%")
 
-def save_results_csv(self):
+def save_results_csv(label,proba):
     with open("historial.csv", "a") as csvfile:
          w = csv.writer(csvfile, delimiter="-")
          w.writerow(
-             [self.text1.get(), self.label, "{:.2f}".format(self.proba) + "%"]
+             [text1.get(), label, "{:.2f}".format(proba) + "%"]
         )
     showinfo(title="Guardar", message="Los datos se guardaron con éxito.")
 
-def create_pdf(self):
-    cap = tkcap.CAP(self.root)
-    ID = "Reporte" + str(self.reportID) + ".jpg"
+def create_pdf():
+    cap = tkcap.CAP(root)
+    ID = "Reporte" + str(reportID) + ".jpg"
     img = cap.capture(ID)
     img = Image.open(ID)
     img = img.convert("RGB")
-    pdf_path = r"Reporte" + str(self.reportID) + ".pdf"
+    pdf_path = r"Reporte" + str(reportID) + ".pdf"
     img.save(pdf_path)
-    self.reportID += 1
+    reportID += 1
     showinfo(title="PDF", message="El PDF fue generado con éxito.")
 
-def delete(self):
+def delete():
     answer = askokcancel(
         title="Confirmación", message="Se borrarán todos los datos.", icon=WARNING
     )
     if answer:
-        self.text1.delete(0, "end")
-        self.text2.delete(1.0, "end")
-        self.text3.delete(1.0, "end")
-        self.text_img1.delete(self.img1, "end")
-        self.text_img2.delete(self.img2, "end")
+        text1.delete(0, "end")
+        text2.delete(1.0, "end")
+        text3.delete(1.0, "end")
+        text_img1.delete(img1, "end")
+        text_img2.delete(img2, "end")
         showinfo(title="Borrar", message="Los datos se borraron con éxito")
 
 def read_dicom_file(path):

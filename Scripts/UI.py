@@ -56,15 +56,15 @@ class App:
 
         #   BUTTONS
         self.button1 = ttk.Button(
-            self.root, text="Predecir", state="disabled", command=self.run_model
+            self.root, text="Predecir", state="disabled", command=run_model
         )
         self.button2 = ttk.Button(
-            self.root, text="Cargar Imagen", command=self.load_img_file
+            self.root, text="Cargar Imagen", command=load_img_file
         )
-        self.button3 = ttk.Button(self.root, text="Borrar", command=self.delete)
-        self.button4 = ttk.Button(self.root, text="PDF", command=self.create_pdf)
+        self.button3 = ttk.Button(self.root, text="Borrar", command=delete)
+        self.button4 = ttk.Button(self.root, text="PDF", command=create_pdf)
         self.button6 = ttk.Button(
-            self.root, text="Guardar", command=self.save_results_csv
+            self.root, text="Guardar", command=save_results_csv
         )
 
         #   WIDGETS POSITIONS
