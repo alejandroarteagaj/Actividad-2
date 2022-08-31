@@ -9,11 +9,7 @@ import getpass
 import tkcap
 from PIL import ImageTk, Image
 import csv
-from backend import save_results_csv
-from backend import delete
-from backend import create_pdf
-from backend import load_img_file
-from backend import run_model
+import backend
 
 class App:
     def __init__(self):
@@ -56,15 +52,15 @@ class App:
 
         #   BUTTONS
         self.button1 = ttk.Button(
-            self.root, text="Predecir", state="disabled", command=self.run_model
+            self.root, text="Predecir", state="disabled", command=backend.run_model
         )
         self.button2 = ttk.Button(
-            self.root, text="Cargar Imagen", command=self.load_img_file
+            self.root, text="Cargar Imagen", command=backend.load_img_file
         )
-        self.button3 = ttk.Button(self.root, text="Borrar", command=self.delete)
-        self.button4 = ttk.Button(self.root, text="PDF", command=self.create_pdf)
+        self.button3 = ttk.Button(self.root, text="Borrar", command=backend.delete)
+        self.button4 = ttk.Button(self.root, text="PDF", command=backend.create_pdf)
         self.button6 = ttk.Button(
-            self.root, text="Guardar", command=self.save_results_csv
+            self.root, text="Guardar", command=backend.save_results_csv
         )
 
         #   WIDGETS POSITIONS

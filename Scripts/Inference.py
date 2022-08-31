@@ -8,7 +8,7 @@ tf.compat.v1.disable_eager_execution()
 tf.compat.v1.experimental.output_all_intermediates(True)
 import cv2
 
-from backend import preprocess
+import backend
 
 
 
@@ -19,7 +19,7 @@ def model_fun():
 
 
 def grad_cam(array):
-    img = preprocess(array)
+    img = backend.preprocess(array)
     model = model_fun()
     preds = model.predict(img)
     argmax = np.argmax(preds[0])
@@ -49,7 +49,7 @@ def grad_cam(array):
 
 def predict(array):
     #   1. call function to pre-process image: it returns image in batch format
-    batch_array_img = preprocess(array)
+    batch_array_img = backend.preprocess(array)
     #   2. call function to load model and predict: it returns predicted class and probability
     model = model_fun()
     # model_cnn = tf.keras.models.load_model('conv_MLP_84.h5')
