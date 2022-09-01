@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk, font, filedialog, Entry
+from tkinter import ttk, font, filedialog, Entry,
 from tkinter.messagebox import askokcancel, showinfo, WARNING
 import getpass
 from PIL import ImageTk, Image
@@ -11,6 +11,8 @@ import numpy as np
 import time
 import tensorflow as tf
 import pydicom as dicom
+from PIL import Image,ImageTk
+from tkinter import *
 
 import UI
 import Inference
@@ -32,7 +34,7 @@ def read_dicom_file(path):
 def load_img_file():##Funciona
     filepath = filedialog.askopenfilename(
         initialdir="/",
-        title="Select image",
+        title="Select image",   
         filetypes=(
             ("DICOM", "*.dcm"),
             ("JPEG", "*.jpeg"),
@@ -44,8 +46,7 @@ def load_img_file():##Funciona
         array, img2show = read_jpg_file(filepath)
         img1 = img2show.resize((250, 250), Image.ANTIALIAS)
         img1 = ImageTk.PhotoImage(img1)
-        UI.text_img1.image_create(END, image=img1)
-        UI.button1["state"] = "enabled"
+        return img1
 
 def run_model(self):
     self.label, self.proba, self.heatmap = Inference.predict(self.array)

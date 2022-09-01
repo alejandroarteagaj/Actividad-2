@@ -53,9 +53,10 @@ class App:
         #   BUTTONS
         self.button1 = ttk.Button(
             self.root, text="Predecir", state="disabled", command=backend.run_model
+            
         )
         self.button2 = ttk.Button(
-            self.root, text="Cargar Imagen", command=backend.load_img_file
+            self.root, text="Cargar Imagen", command=self.UI_loadimage
         )
         self.button3 = ttk.Button(self.root, text="Borrar", command=backend.delete)
         self.button4 = ttk.Button(self.root, text="PDF", command=backend.create_pdf)
@@ -92,6 +93,11 @@ class App:
 
         #   RUN LOOP
         self.root.mainloop()
+
+    def UI_loadimage(self):
+        img1=backend.load_img_file()
+        self.text_img1.image_create(END, image=img1)
+        self.button1["state"] = "enabled"
 
     
     
