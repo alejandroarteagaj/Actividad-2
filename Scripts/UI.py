@@ -8,7 +8,7 @@ from tkinter.messagebox import askokcancel, showinfo, WARNING
 import getpass
 import tkcap
 from PIL import ImageTk, Image
-import csv
+
 import backend
 ##Funciona
 class App:

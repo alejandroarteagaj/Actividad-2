@@ -29,8 +29,8 @@ def read_dicom_file(path):
     img_RGB = cv2.cvtColor(img2, cv2.COLOR_GRAY2RGB)
     return img_RGB, img2show
 
-def load_img_file():##Funciona
-    filepath = filedialog.askopenfilename(
+def load_img_file(self):##Funciona
+    self.filepath = filedialog.askopenfilename(
         initialdir="/",
         title="Select image",
         filetypes=(
@@ -40,11 +40,11 @@ def load_img_file():##Funciona
             ("png files", "*.png"),
             ),
         )
-    if filepath:
-        UI.array, img2show = read_dicom_file(filepath)
-        UI.img1 = img2show.resize((250, 250), Image.ANTIALIAS)
-        UI.img1 = ImageTk.PhotoImage(UI.img1)
-        UI.text_img1.image_create(END, image=UI.img1)
+    if self.filepath:
+        self.array, self.img2show = read_jpg_file(self.filepath)
+        self.img1 = self.img2show.resize((250, 250), Image.ANTIALIAS)
+        self.img1 = ImageTk.PhotoImage(UI.img1)
+        UI.text_img1.image_create(END, image=self.img1)
         UI.button1["state"] = "enabled"
 
 def run_model(self):
@@ -77,7 +77,7 @@ def create_pdf():
     reportID += 1
     showinfo(title="PDF", message="El PDF fue generado con éxito.")
 
-def delete(self):
+def delete():
     answer = askokcancel(
         title="Confirmación", message="Se borrarán todos los datos.", icon=WARNING
     )
@@ -85,19 +85,9 @@ def delete(self):
         UI.text1.delete(0, "end")
         UI.text2.delete(1.0, "end")
         UI.text3.delete(1.0, "end")
-        UI.text_img1.delete(self.img1, "end")
-        UI.text_img2.delete(self.img2, "end")
+        UI.text_img1.delete(UI.img1, "end")
+        UI.text_img2.delete(UI.img2, "end")
         showinfo(title="Borrar", message="Los datos se borraron con éxito")
-
-def read_dicom_file(path):
-    img = dicom.read_file(path)
-    img_array = img.pixel_array
-    img2show = Image.fromarray(img_array)
-    img2 = img_array.astype(float)
-    img2 = (np.maximum(img2, 0) / img2.max()) * 255.0
-    img2 = np.uint8(img2)
-    img_RGB = cv2.cvtColor(img2, cv2.COLOR_GRAY2RGB)
-    return img_RGB, img2show
 
 
 def read_jpg_file(path):
