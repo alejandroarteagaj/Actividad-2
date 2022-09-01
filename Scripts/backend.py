@@ -29,8 +29,8 @@ def read_dicom_file(path):
     img_RGB = cv2.cvtColor(img2, cv2.COLOR_GRAY2RGB)
     return img_RGB, img2show
 
-def load_img_file(self):##Funciona
-    self.filepath = filedialog.askopenfilename(
+def load_img_file():##Funciona
+    filepath = filedialog.askopenfilename(
         initialdir="/",
         title="Select image",
         filetypes=(
@@ -40,11 +40,11 @@ def load_img_file(self):##Funciona
             ("png files", "*.png"),
             ),
         )
-    if self.filepath:
-        self.array, self.img2show = read_jpg_file(self.filepath)
-        self.img1 = self.img2show.resize((250, 250), Image.ANTIALIAS)
-        self.img1 = ImageTk.PhotoImage(UI.img1)
-        UI.text_img1.image_create(END, image=self.img1)
+    if filepath:
+        array, img2show = read_jpg_file(filepath)
+        img1 = img2show.resize((250, 250), Image.ANTIALIAS)
+        img1 = ImageTk.PhotoImage(img1)
+        UI.text_img1.image_create(END, image=img1)
         UI.button1["state"] = "enabled"
 
 def run_model(self):
