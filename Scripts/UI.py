@@ -94,7 +94,7 @@ class App:
         #   RUN LOOP
         self.root.mainloop()
 
-    def UI_loadimage(self):
+    def UI_loadimage(self): ## ob
         img1=backend.load_img_file()
         self.text_img1.image_create(END, image=img1)
         self.button1["state"] = "enabled"

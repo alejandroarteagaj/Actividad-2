@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk, font, filedialog, Entry,
+from tkinter import ttk, font, filedialog, Entry
 from tkinter.messagebox import askokcancel, showinfo, WARNING
 import getpass
 from PIL import ImageTk, Image
@@ -13,7 +13,7 @@ import tensorflow as tf
 import pydicom as dicom
 from PIL import Image,ImageTk
 from tkinter import *
-
+import PIL
 import UI
 import Inference
 
@@ -44,7 +44,7 @@ def load_img_file():##Funciona
         )
     if filepath:
         array, img2show = read_jpg_file(filepath)
-        img1 = img2show.resize((250, 250), Image.ANTIALIAS)
+        img1 = img2show.resize((250, 250), PIL.Image.ANTIALIAS)
         img1 = ImageTk.PhotoImage(img1)
         return img1
 
@@ -94,7 +94,7 @@ def delete():
 def read_jpg_file(path):
     img = cv2.imread(path)
     img_array = np.asarray(img)
-    img2show = Image.fromarray(img_array)
+    img2show = PIL.Image.fromarray(img_array)
     img2 = img_array.astype(float)
     img2 = (np.maximum(img2, 0) / img2.max()) * 255.0
     img2 = np.uint8(img2)
