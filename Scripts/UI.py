@@ -53,7 +53,7 @@ class App:
 
         #   BUTTONS
         self.button1 = ttk.Button(
-            self.root, text="Predecir", state="disabled", command=backend.run_model
+            self.root, text="Predecir", state="disabled", command=self.Modelo
             
         )
         self.button2 = ttk.Button(
@@ -92,21 +92,23 @@ class App:
         #   NUMERO DE IDENTIFICACIÓN PARA GENERAR PDF
         self.reportID = 0
 
-        #   RUN LOOP
+        #   RUN LOOP    
         self.root.mainloop()
 
     def UI_loadimage(self): ## ob
-        img1=backend.load_img_file()
+        img1,self.array=backend.load_img_file()
         self.text_img1.image_create(END, image=img1)
         self.button1["state"] = "enabled"
         self.text_img1.place(img1)
-    
+        return self.array  
+
     def Modelo(self):
-        img2=backend.run_model(self.img1)
+        array2=backend.preprocess(self.array)
+        img2=backend.run_model(self.img1,array2)
         self.text_img2.image_create(END, image=self.img2)
         self.text2.insert(END, label)
         self.text3.insert(END, "{:.2f}".format(proba)+"%")
-        
+
 
     
     

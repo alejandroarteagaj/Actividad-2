@@ -1,3 +1,4 @@
+from array import array
 from tkinter import *
 from tkinter import ttk, font, filedialog, Entry
 from tkinter.messagebox import askokcancel, showinfo, WARNING
@@ -48,9 +49,8 @@ def load_img_file():##Funciona
         img1 = ImageTk.PhotoImage(img1)
         return img1
 
-def run_model(img1):
-    array=preprocess(img1)
-    label, proba, heatmap = Inference.predict(array)
+def run_model(array2):
+    label, proba, heatmap = Inference.predict(array2)
     img2 = Image.fromarray(heatmap)
     img2 = img2.resize((250, 250), Image.ANTIALIAS)
     img2 = ImageTk.PhotoImage(img2)
