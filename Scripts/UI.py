@@ -96,11 +96,11 @@ class App:
         self.root.mainloop()
 
     def UI_loadimage(self): ## ob
-        img1,self.array=backend.load_img_file()
+        img1=backend.load_img_file()
         self.text_img1.image_create(END, image=img1)
         self.button1["state"] = "enabled"
         self.text_img1.place(img1)
-        return self.array  
+        
 
     def Modelo(self):
         array2=backend.preprocess(self.array)
