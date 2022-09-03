@@ -9,7 +9,7 @@ from tkinter.messagebox import askokcancel, showinfo, WARNING
 import getpass
 import tkcap
 from PIL import ImageTk, Image
-
+import numpy as np
 import backend
 ##Funciona
 class App:
@@ -96,14 +96,15 @@ class App:
         self.root.mainloop()
 
     def UI_loadimage(self): ## ob
-        img1=backend.load_img_file()
-        self.text_img1.image_create(END, image=img1)
+        self.img1=backend.load_img_file()
+        self.text_img1.image_create(END, image=self.img1)
         self.button1["state"] = "enabled"
-        self.text_img1.place(img1)
+        self.text_img1.place(self.img1)
         
 
     def Modelo(self):
-        array2=backend.preprocess(self.array)
+        array=np.asarray(self.img1)
+        array2=backend.preprocess(array)
         img2=backend.run_model(self.img1,array2)
         self.text_img2.image_create(END, image=self.img2)
         self.text2.insert(END, label)

@@ -90,7 +90,7 @@ def delete():
         showinfo(title="Borrar", message="Los datos se borraron con éxito")
 
 
-def read_jpg_file(path):
+def read_jpg_file(path):#Funciona
     img = cv2.imread(path)
     img_array = np.asarray(img)
     img2show = PIL.Image.fromarray(img_array)
