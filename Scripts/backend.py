@@ -1,4 +1,4 @@
-from tkinter import *
+cfrom tkinter import *
 from tkinter import ttk, font, filedialog, Entry
 from tkinter.messagebox import askokcancel, showinfo, WARNING
 import getpass
@@ -48,15 +48,14 @@ def load_img_file():##Funciona
         img1 = ImageTk.PhotoImage(img1)
         return img1
 
-def run_model(self):
-    self.label, self.proba, self.heatmap = Inference.predict(self.array)
-    self.img2 = Image.fromarray(self.heatmap)
-    self.img2 = self.img2.resize((250, 250), Image.ANTIALIAS)
-    self.img2 = ImageTk.PhotoImage(self.img2)
+def run_model(img1):
+    array=preprocess(img1)
+    label, proba, heatmap = Inference.predict(array)
+    img2 = Image.fromarray(heatmap)
+    img2 = img2.resize((250, 250), Image.ANTIALIAS)
+    img2 = ImageTk.PhotoImage(img2)
     print("OK")
-    UI.text_img2.image_create(END, image=self.img2)
-    UI.text2.insert(END, self.label)
-    UI.text3.insert(END, "{:.2f}".format(self.proba) + "%")
+    return img2
     
 
 def save_results_csv(self):

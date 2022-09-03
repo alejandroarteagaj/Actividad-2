@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from ast import Delete
+from cProfile import label
 from runpy import run_module
 from tkinter import *
 from tkinter import ttk, font, filedialog, Entry
@@ -98,6 +99,14 @@ class App:
         img1=backend.load_img_file()
         self.text_img1.image_create(END, image=img1)
         self.button1["state"] = "enabled"
+        self.text_img1.place(img1)
+    
+    def Modelo(self):
+        img2=backend.run_model(self.img1)
+        self.text_img2.image_create(END, image=self.img2)
+        self.text2.insert(END, label)
+        self.text3.insert(END, "{:.2f}".format(proba)+"%")
+        
 
     
     
