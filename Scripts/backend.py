@@ -1,4 +1,4 @@
-cfrom tkinter import *
+from tkinter import *
 from tkinter import ttk, font, filedialog, Entry
 from tkinter.messagebox import askokcancel, showinfo, WARNING
 import getpass
