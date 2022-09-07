@@ -49,13 +49,13 @@ def load_img_file():##Funciona
         img1 = ImageTk.PhotoImage(img1)
         return img1
 
-def run_model(array2):
-    label, proba, heatmap = Inference.predict(array2)
+def run_model(array):
+    label, proba, heatmap = Inference.predict(array)
     img2 = Image.fromarray(heatmap)
     img2 = img2.resize((250, 250), Image.ANTIALIAS)
     img2 = ImageTk.PhotoImage(img2)
     print("OK")
-    return img2
+    return img2 
     
 
 def save_results_csv(self):
@@ -98,7 +98,7 @@ def read_jpg_file(path):#Funciona
     img2 = (np.maximum(img2, 0) / img2.max()) * 255.0
     img2 = np.uint8(img2)
     return img2, img2show
-
+## ERROR AQUI
 def preprocess(array):
     array = cv2.resize(array, (512, 512))
     array = cv2.cvtColor(array, cv2.COLOR_BGR2GRAY)

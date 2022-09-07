@@ -104,11 +104,10 @@ class App:
 
     def Modelo(self):
         array=np.asarray(self.img1)
-        array2=backend.preprocess(array)
-        img2=backend.run_model(self.img1,array2)
+        img2=backend.run_model(array)
         self.text_img2.image_create(END, image=self.img2)
         self.text2.insert(END, label)
-        self.text3.insert(END, "{:.2f}".format(proba)+"%")
+        self.text3.insert(END, "{:.2f}".format(backend.run_model(0))+"%")
 
 
     
