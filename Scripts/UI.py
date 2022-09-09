@@ -95,6 +95,7 @@ class App:
         self.root.mainloop()
 
     def UI_loadimage(self): ## ob
+        global img1
         img1=backend.load_img_file(self)
         self.text_img1.image_create(END, image=img1)
         self.button1["state"] = "enabled"
@@ -102,7 +103,7 @@ class App:
         
 
     def Modelo(self):
-        
+        global img2
         img2,self.label,self.proba=backend.run_model()
         
         self.text_img2.image_create(END, image=img2)
@@ -136,8 +137,8 @@ class App:
          self.text1.delete(0, "end")
          self.text2.delete(1.0, "end")
          self.text3.delete(1.0, "end")
-         self.text_img1.delete(self.img1, "end")
-         self.text_img2.delete(self.img2, "end")
+         self.text_img1.delete(img1, "end")
+         self.text_img2.delete(img2, "end")
          showinfo(title="Borrar", message="Los datos se borraron con éxito")
 
     
