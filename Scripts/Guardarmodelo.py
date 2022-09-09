@@ -1,6 +1,6 @@
 ##Script para cargar modelo
 import urllib.request
-url = "https://drive.google.com/file/d/1IRctNklwe2Aa2dBRK32nYGtS7xtJ1CXr/view?usp=sharing"
+url = "https://www.dropbox.com/s/yx6n606i7cfcvoz/WilhemNet_86.h5?dl=1&quot"
 file = "WilhemNet_86(1).h5"
 r = urllib.request.urlopen(url)
 f=open(file,"wb")
