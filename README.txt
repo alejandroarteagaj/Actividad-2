@@ -15,7 +15,7 @@ Para correr el sistema de forma local realizar los siguientes pasos:
 
 1. Clonar el repositorio utilizando el siguiente link: https://github.com/alejandroarteagaj/Actividad-2.git
 
-2. Entrar a la carpeta de Scripts
+2. Entrar a la carpeta de Scripts cd /Actividad-2/Scripts/
 
 2. Una vez dentro de la carpeta descargar el modelo .h5 desde el siguiente link: https://drive.google.com/file/d/1IRctNklwe2Aa2dBRK32nYGtS7xtJ1CXr/view?usp=sharing
 
