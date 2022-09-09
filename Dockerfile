@@ -13,8 +13,8 @@ RUN pip3 install pyproject-toml
 RUN pip3 install --upgrade pip setuptools wheel
 RUN pip3 install -r requirements.txt
 RUN pip3 install Xlib
-
-RUN cd Scripts/
-RUN python Guardarrmodelo.py
-RUN python UI.py
+WORKDIR /Actividad-2/Scripts
+RUN python Guardarmodelo.py
+#RUN python UI.py
 CMD ["python", "UI.py"]
+
