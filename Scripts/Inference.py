@@ -1,25 +1,26 @@
+
+from array import array
 import numpy as np
 import time
 from tensorflow.keras import backend as K
 import tensorflow as tf
-import pydicom as dicom
+
 
 tf.compat.v1.disable_eager_execution()
 tf.compat.v1.experimental.output_all_intermediates(True)
 import cv2
-
 import backend
 
 
 
 
 def model_fun():
-    model_cnn = tf.keras.models.load_model("WilhemNet_86.h5")
+    model_cnn = tf.keras.models.load_model("WilhemNet_86(1).h5")
     return model_cnn
 
 
-def grad_cam(array):
-    img = backend.preprocess(array)
+def grad_cam():
+    img,array = backend.preprocess()
     model = model_fun()
     preds = model.predict(img)
     argmax = np.argmax(preds[0])
@@ -47,9 +48,9 @@ def grad_cam(array):
     return superimposed_img[:, :, ::-1]
 
 
-def predict(array):
+def predict():
     #   1. call function to pre-process image: it returns image in batch format
-    batch_array_img = backend.preprocess(array)
+    batch_array_img,array= backend.preprocess()
     #   2. call function to load model and predict: it returns predicted class and probability
     model = model_fun()
     # model_cnn = tf.keras.models.load_model('conv_MLP_84.h5')
@@ -63,5 +64,5 @@ def predict(array):
     if prediction == 2:
         label = "viral"
     #   3. call function to generate Grad-CAM: it returns an image with a superimposed heatmap
-    heatmap = grad_cam(array)
+    heatmap = grad_cam()## por ahorra
     return (label, proba, heatmap)

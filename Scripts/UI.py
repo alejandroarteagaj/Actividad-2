@@ -1,16 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from ast import Delete
+
 from cProfile import label
-from runpy import run_module
 from tkinter import *
-from tkinter import ttk, font, filedialog, Entry
+from tkinter import ttk, font,  Entry
 from tkinter.messagebox import askokcancel, showinfo, WARNING
-import getpass
-import tkcap
-from PIL import ImageTk, Image
 import numpy as np
 import backend
+import csv
+import tkcap
+import PIL
 ##Funciona
 class App:
     def __init__(self):
@@ -59,10 +58,10 @@ class App:
         self.button2 = ttk.Button(
             self.root, text="Cargar Imagen", command=self.UI_loadimage
         )
-        self.button3 = ttk.Button(self.root, text="Borrar", command=backend.delete)
-        self.button4 = ttk.Button(self.root, text="PDF", command=backend.create_pdf)
+        self.button3 = ttk.Button(self.root, text="Borrar", command=self.borrar)
+        self.button4 = ttk.Button(self.root, text="PDF", command=self.create_pdf)
         self.button6 = ttk.Button(
-            self.root, text="Guardar", command=backend.save_results_csv
+            self.root, text="Guardar", command=self.save_results_csv
         )
 
         #   WIDGETS POSITIONS
@@ -96,21 +95,51 @@ class App:
         self.root.mainloop()
 
     def UI_loadimage(self): ## ob
-        self.img1=backend.load_img_file()
-        self.text_img1.image_create(END, image=self.img1)
+        img1=backend.load_img_file(self)
+        self.text_img1.image_create(END, image=img1)
         self.button1["state"] = "enabled"
-        self.text_img1.place(self.img1)
+        return img1
         
 
     def Modelo(self):
-        array=np.asarray(self.img1)
-        img2=backend.run_model(array)
-        self.text_img2.image_create(END, image=self.img2)
-        self.text2.insert(END, label)
-        self.text3.insert(END, "{:.2f}".format(backend.run_model(0))+"%")
+        
+        img2,self.label,self.proba=backend.run_model()
+        
+        self.text_img2.image_create(END, image=img2)
+        self.text2.insert(END, self.label)
+        self.text3.insert(END, "{:.2f}".format(self.proba)+"%")
+        
 
-
+    def save_results_csv(self):
+     with open("historial.csv", "a") as csvfile:
+           w = csv.writer(csvfile, delimiter="-")
+           w.writerow(
+             [self.text1.get(), self.label, "{:.2f}".format(self.proba) + "%"]
+        )
+           showinfo(title="Guardar", message="Los datos se guardaron con éxito.")
     
+
+    def create_pdf(self):
+      cap = tkcap.CAP(self.root)
+      ID = "Reporte" + str(self.reportID) + ".jpg"
+      img = cap.capture(ID)
+      img = PIL.Image.open(ID)
+      img = img.convert("RGB")
+      pdf_path = r"Reporte" + str(self.reportID) + ".pdf"
+      img.save(pdf_path)
+      self.reportID += 1
+      showinfo(title="PDF", message="El PDF fue generado con éxito.")
+    
+    def borrar(self):
+        answer = backend.delete()
+        if answer:
+         self.text1.delete(0, "end")
+         self.text2.delete(1.0, "end")
+         self.text3.delete(1.0, "end")
+         self.text_img1.delete(self.img1, "end")
+         self.text_img2.delete(self.img2, "end")
+         showinfo(title="Borrar", message="Los datos se borraron con éxito")
+
     
 
 def main():
