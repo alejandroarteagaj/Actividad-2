@@ -14,7 +14,7 @@ RUN pip3 install --upgrade pip setuptools wheel
 RUN pip3 install -r requirements.txt
 RUN pip3 install Xlib
 WORKDIR /Actividad-2/Scripts
-RUN python Guardarmodelo.py
+RUN python guardarmodelo.py
 #RUN python UI.py
 CMD ["python", "UI.py"]
 
