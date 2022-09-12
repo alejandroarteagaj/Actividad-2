@@ -15,7 +15,7 @@ import backend
 
 
 def model_fun():
-    model_cnn = tf.keras.models.load_model("WilhemNet_86.h5")
+    model_cnn = tf.keras.models.load_model("WilhemNet_86(1).h5")
     return model_cnn
 
 
