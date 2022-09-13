@@ -1,4 +1,4 @@
-
+#Hecho por Juan camilo giraldo y Alejandro Arteaga 
 
 from tkinter import *
 from tkinter import ttk, font, filedialog, Entry

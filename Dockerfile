@@ -1,3 +1,4 @@
+#Hecho por Juan camilo giraldo y Alejandro Arteaga 
 FROM python:3.8
 
 RUN git clone https://github.com/alejandroarteagaj/Actividad-2.git

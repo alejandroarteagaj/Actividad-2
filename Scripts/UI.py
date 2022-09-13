@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+#Hecho por Juan camilo giraldo y Alejandro Arteaga 
 from cProfile import label
 from tkinter import *
 from tkinter import ttk, font,  Entry

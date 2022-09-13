@@ -1,4 +1,4 @@
-
+#Hecho por Juan camilo giraldo y Alejandro Arteaga 
 from array import array
 import numpy as np
 import time
