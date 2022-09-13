@@ -16,6 +16,6 @@ RUN pip3 install Xlib
 WORKDIR /Actividad-2/Scripts
 RUN python Guardarmodelo.py
 #RUN python UI.py
-ENTRYPOINT python Guardarmodelo.py
+ENTRYPOINT python UI.py
 
 
