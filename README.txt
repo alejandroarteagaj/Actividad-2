@@ -1,5 +1,5 @@
 #Actividad 2
-
+Realizado por: Juan camilo giraldo y Alejandro Arteaga 
 Parte 1:
 
 En este repositrio se encuentra la propuesta de rediseño del detector de neumonia, en este rediseño se plantearon tres scripts
