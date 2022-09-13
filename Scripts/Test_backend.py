@@ -1,6 +1,7 @@
 import unittest
+import backend
 
-from backend import run_model
 class Testbackend(unittest.TestCase):
     def test_mtod(self):
-        self.debug
+        self.debug(backend.run_model)
+        
